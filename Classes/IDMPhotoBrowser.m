@@ -1307,6 +1307,11 @@ NSLocalizedStringFromTableInBundle((key), nil, [NSBundle bundleWithPath:[[NSBund
             __typeof__(self) __weak selfBlock = self;
 
 			[self.activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+
+        if (selfBlock.activityCompletion) {
+          selfBlock.activityCompletion(activityType, completed, returnedItems, activityError);
+        }
+
 				[selfBlock hideControlsAfterDelay];
 				selfBlock.activityViewController = nil;
 			}];
